@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Detail;
+use App\Angsuran;
 
 class DetailController extends Controller
 {
@@ -13,7 +15,8 @@ class DetailController extends Controller
      */
     public function index()
     {
-        //
+      $as = Detail::all();
+      return view('detail.index')->with('sa',$as);
     }
 
     /**
@@ -23,7 +26,8 @@ class DetailController extends Controller
      */
     public function create()
     {
-        //
+        $as = Angsuran::all();
+        return view('detail.create')->with('sa',$as);
     }
 
     /**
@@ -34,7 +38,21 @@ class DetailController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $this->validate($request,[
+        'id_angsuran' => 'required',
+        'tgl_jatuh_tempo' => 'required',
+        'besar_angsuran' => 'required',
+        'ket' => 'required',
+      ]);
+
+      $sapi = new Detail();
+      $sapi->id_angsuran = $request->id_angsuran;
+      $sapi->tgl_jatuh_tempo = $request->tgl_jatuh_tempo;
+      $sapi->besar_angsuran = $request->besar_angsuran;
+      $sapi->ket = $request->ket;
+      $sapi->save();
+
+      return redirect('detail');
     }
 
     /**
@@ -45,7 +63,8 @@ class DetailController extends Controller
      */
     public function show($id)
     {
-        //
+      $sapi = Detail::find($id);
+      return view('detail.show')->with('sa',$sapi);
     }
 
     /**
@@ -56,7 +75,9 @@ class DetailController extends Controller
      */
     public function edit($id)
     {
-        //
+      $sapi = Detail::find($id);
+      $ang = Angsuran::all();
+      return view('detail.edit')->with('sa',$ang)->with('de',$sapi);
     }
 
     /**
@@ -68,7 +89,21 @@ class DetailController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $this->validate($request,[
+        'id_angsuran' => 'required',
+        'tgl_jatuh_tempo' => 'required',
+        'besar_angsuran' => 'required',
+        'ket' => 'required',
+      ]);
+
+      $sapi = Detail::find($id);
+      $sapi->id_angsuran = $request->id_angsuran;
+      $sapi->tgl_jatuh_tempo = $request->tgl_jatuh_tempo;
+      $sapi->besar_angsuran = $request->besar_angsuran;
+      $sapi->ket = $request->ket;
+      $sapi->save();
+
+      return redirect('detail');
     }
 
     /**

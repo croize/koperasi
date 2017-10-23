@@ -69,7 +69,7 @@ class AngsuranController extends Controller
     public function show($id)
     {
         $ang = Angsuran::find($id);
-        return view('angsuran.show')->with('sa',$ang)->with('ta',$got)->with('gori',$kat);
+        return view('angsuran.show')->with('sa',$ang);
     }
 
     /**

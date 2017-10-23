@@ -124,6 +124,75 @@
 				</script>
 
 				<ul class="nav nav-list">
+					@if(Auth::user()->roles == "2")
+					<li class="">
+						<a href="/home">
+							<i class="menu-icon fa fa-tachometer"></i>
+							<span class="menu-text"> Dashboard </span>
+						</a>
+					</li>
+					<li class="">
+						<a href="/anggota">
+							<i class="menu-icon fa fa-user"></i>
+							<span class="menu-text"> Anggota </span>
+						</a>
+					</li>
+					<li class="">
+						<a href="/angsuran">
+							<i class="menu-icon fa fa-money"></i>
+							<span class="menu-text"> Angsuran </span>
+						</a>
+					</li>
+					@elseif(Auth::user()->roles == "1")
+					<li class="">
+						<a href="/home">
+							<i class="menu-icon fa fa-tachometer"></i>
+							<span class="menu-text"> Dashboard </span>
+						</a>
+					</li>
+          <li class="">
+						<a href="/users">
+							<i class="menu-icon fa fa-users"></i>
+							<span class="menu-text"> Users </span>
+						</a>
+					</li>
+          <li class="">
+						<a href="/petugas">
+							<i class="menu-icon fa fa-user-plus"></i>
+							<span class="menu-text"> Petugas </span>
+						</a>
+					</li>
+					<li class="">
+						<a href="/simpanan">
+							<i class="menu-icon fa fa-money"></i>
+							<span class="menu-text"> Simpanan </span>
+						</a>
+					</li>
+					<li class="">
+						<a href="/pinjaman">
+							<i class="menu-icon fa fa-money"></i>
+							<span class="menu-text"> Pinjaman </span>
+						</a>
+					</li>
+					<li class="">
+						<a href="/angsuran">
+							<i class="menu-icon fa fa-money"></i>
+							<span class="menu-text"> Angsuran </span>
+						</a>
+					</li>
+					<li class="">
+						<a href="/katagori">
+							<i class="menu-icon fa fa-money"></i>
+							<span class="menu-text"> Katagori </span>
+						</a>
+					</li>
+					<li class="">
+						<a href="/detail">
+							<i class="menu-icon fa fa-money"></i>
+							<span class="menu-text"> Detail </span>
+						</a>
+					</li>
+					@else
 					<li class="">
 						<a href="/home">
 							<i class="menu-icon fa fa-tachometer"></i>
@@ -166,7 +235,19 @@
 							<span class="menu-text"> Angsuran </span>
 						</a>
 					</li>
-
+					<li class="">
+						<a href="/katagori">
+							<i class="menu-icon fa fa-money"></i>
+							<span class="menu-text"> Katagori </span>
+						</a>
+					</li>
+					<li class="">
+						<a href="/detail">
+							<i class="menu-icon fa fa-money"></i>
+							<span class="menu-text"> Detail </span>
+						</a>
+					</li>
+					@endif
 				</ul><!-- /.nav-list -->
 
 

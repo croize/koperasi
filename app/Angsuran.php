@@ -25,4 +25,9 @@ class Angsuran extends Model
       return $this->hasMany('App\Pinjaman');
     }
 
+    public function detail()
+    {
+      return $this->hasMany('App\Detail');
+    }
+
 }

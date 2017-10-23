@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Anggota;
+use Auth;
 
 class AnggotaController extends Controller
 {
@@ -16,6 +17,7 @@ class AnggotaController extends Controller
      public function __construct()
      {
          $this->middleware('auth');
+         $this->middleware('roles:0' || 'roles:1' || 'roles:2');
      }
 
     public function index()
@@ -31,7 +33,11 @@ class AnggotaController extends Controller
      */
     public function create()
     {
-      return view('anggota.create');
+      if (Auth::user()->roles == 2) {
+        return redirect('anggota');
+      }else{
+        return view('anggota.create');
+      }
     }
 
     /**
@@ -87,8 +93,12 @@ class AnggotaController extends Controller
      */
     public function edit($id)
     {
-      $as = Anggota::find($id);
-      return view('anggota.edit')->with('sa',$as);
+      if (Auth::user()->roles == 2) {
+        return redirect('anggota');
+      }else{
+        $as = Anggota::find($id);
+        return view('anggota.edit')->with('sa',$as);
+      }
     }
 
     /**
@@ -133,8 +143,12 @@ class AnggotaController extends Controller
      */
     public function destroy($id)
     {
+      if (Auth::user()->roles == 2) {
+        return redirect('anggota');
+      }else {
         $sa = Anggota::find($id);
         $sa->delete();
         return redirect('anggota');
+      }
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Katagori;
 
 class KatagoriController extends Controller
 {
@@ -13,7 +14,8 @@ class KatagoriController extends Controller
      */
     public function index()
     {
-        //
+        $as = Katagori::all();
+        return view('katagori.index')->with('sa',$as);
     }
 
     /**
@@ -23,7 +25,7 @@ class KatagoriController extends Controller
      */
     public function create()
     {
-        //
+        return view('katagori.create');
     }
 
     /**
@@ -34,7 +36,16 @@ class KatagoriController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+          'nama_pinjaman' => 'required',
+        ]);
+
+        $sapi = new Katagori();
+        $sapi->nama_pinjaman = $request->nama_pinjaman;
+        $sapi->save();
+
+        return redirect('katagori');
+
     }
 
     /**
@@ -45,7 +56,8 @@ class KatagoriController extends Controller
      */
     public function show($id)
     {
-        //
+        $sapi = Katagori::find($id);
+        return view('katagori.show')->with('sa',$sapi);
     }
 
     /**
@@ -56,7 +68,8 @@ class KatagoriController extends Controller
      */
     public function edit($id)
     {
-        //
+        $sapi = Katagori::find($id);
+        return view('katagori.edit')->with('sa',$sapi);
     }
 
     /**
@@ -68,7 +81,15 @@ class KatagoriController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $this->validate($request,[
+        'nama_pinjaman' => 'required',
+      ]);
+
+      $sapi = Katagori::find($id);
+      $sapi->nama_pinjaman = $request->nama_pinjaman;
+      $sapi->save();
+
+      return redirect('katagori');
     }
 
     /**
@@ -79,6 +100,9 @@ class KatagoriController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $as = Katagori::find($id);
+        $as->delete();
+
+        return redirect('katagori');
     }
 }

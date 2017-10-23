@@ -33,7 +33,7 @@
       <thead>
         <tr>
           <th>No</th>
-          <th>Nama Pinjaman</th>
+          <th>Katagori Pinjaman</th>
           <th>Nama Anggota</th>
           <th>Besar Angsuran</th>
           <th>Tanggal Pembayaran</th>

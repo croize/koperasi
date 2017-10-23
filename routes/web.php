@@ -29,6 +29,15 @@ Route::get('pinjaman/delete/{id}', 'PinjamanController@destroy');
 Route::resource('angsuran', 'AngsuranController');
 Route::get('angsuran/delete/{id}', 'AngsuranController@destroy');
 
+Route::resource('katagori', 'KatagoriController');
+Route::get('katagori/delete/{id}', 'KatagoriController@destroy');
+
+Route::resource('detail', 'DetailController');
+Route::get('detail/delete/{id}', 'DetailController@destroy');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+Route::get('404',function(){
+  return view('404');
+});

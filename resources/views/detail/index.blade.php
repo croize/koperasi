@@ -7,26 +7,22 @@
       <i class="ace-icon fa fa-home home-icon"></i>
       <a href="/home">Home</a>
     </li>
-    <li class="active">Petugas</li>
+    <li class="active">Detail</li>
   </ul><!-- /.breadcrumb -->
 </div>
 
 <div class="col-xs-12">
-  <h3 class="header smaller lighter blue">Anggota</h3>
-  @if(Auth::user()->roles == "2")
-
-  @else
-  <a href="/anggota/create"><button class="btn btn-primary">
+  <h3 class="header smaller lighter blue">Detail</h3>
+  <a href="/detail/create"><button class="btn btn-primary">
     <i class="ace-icon fa fa-pencil align-top bigger-125"></i>
     Create
   </button></a>
-  @endif
   <div class="clearfix">
     <div class="pull-right tableTools-container"></div>
   </div>
 
   <div class="table-header">
-    Data Petugas
+    Data Detail Peminjaman
   </div>
 
   <!-- div.table-responsive -->
@@ -37,67 +33,40 @@
       <thead>
         <tr>
           <th>No</th>
-          <th>Nama</th>
-          <th class="hidden-480">TTL</th>
-          <th>Alamat</th>
-          <th class="hidden-480">Nomor Telepon</th>
-          <th>Jenis Kelamin</th>
-          <th>Status</th>
-          <th class="hidden-480">Keterangan</th>
+          <th>Angsuran Anggota</th>
+          <th>Tanggal Jatuh Tempo</th>
+          <th>Besar Angsuran</th>
+          <th>Keterangan</th>
           <th>Action</th>
         </tr>
       </thead>
 
       <tbody>
         @foreach($sa as $su)
-
         <tr>
           <td>{{ $loop->iteration }}</td>
-          <td>{{$su->nama}}</td>
-          <td class="hidden-480">{{$su->tmp_lhr}} {{$su->tgl_lhr}}</td>
-          <td>{{$su->alamat}}</td>
-
-          <td class="hidden-480">
-            {{$su->no_tlp}}
-          </td>
-          <td class="hidden-480">
-            @if($su->j_kel == "L")
-              <i class="fa fa-male" aria-hidden="true"></i>
-              Laki-Laki
-            @else
-              <i class="fa fa-female" aria-hidden="true"></i>
-              Perempuan
-            @endif
-          </td>
-          <td class="hidden-480">
-            @if($su->status == "Approved")
-              <span class="label label-sm label-success">Approved</span>
-            @else
-              <span class="label label-sm label-warning">Pending</span>
-            @endif
-
-          </td>
-
-          <td class="hidden-480">
-            {{$su->ket}}
-          </td>
+          <td>{{$su->angsuran->anggota['nama']}}</td>
+          <td>{{$su->tgl_jatuh_tempo}}</td>
+          <td>{{$su->besar_angsuran}}</td>
+          <td>@if($su->ket == "Tuntas")
+            <span class="label label-sm label-success">Tuntas</span>
+          @else
+            <span class="label label-sm label-warning">Belum Tuntas</span>
+          @endif</td>
 
           <td>
             <div class="hidden-sm hidden-xs action-buttons">
-              <a class="blue" href="/anggota/{{$su->id_anggota}}">
+              <a class="blue" href="/detail/{{$su->id_detail_angsuran}}">
                 <i class="ace-icon fa fa-search-plus bigger-130"></i>
               </a>
-              @if(Auth::user()->roles == "2")
 
-              @else
-              <a class="green" href="/anggota/{{$su->id_anggota}}/edit">
+              <a class="green" href="/detail/{{$su->id_detail_angsuran}}/edit">
                 <i class="ace-icon fa fa-pencil bigger-130"></i>
               </a>
 
-              <a class="red" href="{{url('anggota/delete',$su->id_anggota)}}">
+              <a class="red" href="{{url('detail/delete',$su->id_detail_angsuran)}}">
                 <i class="ace-icon fa fa-trash-o bigger-130"></i>
               </a>
-              @endif
             </div>
 
             <div class="hidden-md hidden-lg">
@@ -142,5 +111,5 @@
 
 @endsection
 @section('jumlahdata')
-  null,null,null,null,null,null,null,
+  null,null,null,null,
 @endsection
